@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
+import 'config/api_config.dart';
 import 'services/auth_service.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  // Log every endpoint URL to the debug console on startup.
+  ApiConfig.debugPrintConfig();
+  // Fire a background health-check so the first log line confirms reachability.
+  AuthService().healthCheck();
   runApp(const AuthNavigationApp());
 }
 

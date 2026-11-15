@@ -1,9 +1,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Required for all HTTP/HTTPS traffic (including release APKs) -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Allows the app to check network state before making requests -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:label="Aster"
         android:usesCleartextTraffic="true">
+        <!--
+            android:usesCleartextTraffic="true" is required so Android does NOT
+            block plain http:// traffic to 10.19.1.21:5173 or other local IPs.
+            Remove it (or set to false) only when ALL endpoints are HTTPS.
+        -->
         <activity
             android:name="io.flutter.embedding.android.FlutterActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
