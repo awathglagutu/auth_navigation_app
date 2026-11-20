@@ -19,14 +19,17 @@ import 'package:flutter/foundation.dart';
 /// IMPORTANT: Every URL is printed to the debug console on startup.
 /// Confirm the register/login URLs look correct before testing.
 
-enum _Env { studentWebHost, androidEmulator, localWifi }
+enum _Env { studentWebHost, androidEmulator, localWifi, localhost }
 
 // ─── Change this one constant to switch environments ───────────────────────
-const _Env _env = _Env.studentWebHost;
+// Set to _Env.androidEmulator (for Android Emulator)
+// or _Env.localWifi (for physical device over Wi-Fi)
+// or _Env.localhost (for Chrome / Desktop / Web)
+const _Env _env = _Env.androidEmulator;
 
 /// LAN IP of your PC when using [_Env.localWifi].
-/// Example: '192.168.1.42'  (run `ipconfig` to find it)
-const String _lanIp = '192.168.1.42';
+/// Current PC Wi-Fi IP is '10.117.142.49' (run `ipconfig` on Windows to check).
+const String _lanIp = '10.117.142.49';
 // ───────────────────────────────────────────────────────────────────────────
 
 class ApiConfig {
@@ -47,6 +50,9 @@ class ApiConfig {
       case _Env.localWifi:
         // php -S 0.0.0.0:5173 -t backend  →  device on same Wi-Fi
         return 'http://$_lanIp:5173';
+      case _Env.localhost:
+        // For Chrome or desktop app
+        return 'http://127.0.0.1:5173';
     }
   }
 
